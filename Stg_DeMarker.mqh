@@ -16,7 +16,7 @@ INPUT int DeMarker_PriceStopMethod = 0;                                   // Pri
 INPUT float DeMarker_PriceStopLevel = 0;                                  // Price stop level
 INPUT int DeMarker_TickFilterMethod = 1;                                  // Tick filter method
 INPUT float DeMarker_MaxSpread = 4.0;                                     // Max spread to trade (pips)
-INPUT int DeMarker_Shift = 0;                                             // Shift
+INPUT short DeMarker_Shift = 0;                                           // Shift
 INPUT int DeMarker_OrderCloseTime = -20;                                  // Order close time in mins (>0) or bars (<0)
 INPUT string __DeMarker_Indi_DeMarker_Parameters__ =
     "-- DeMarker strategy: DeMarker indicator params --";  // >>> DeMarker strategy: DeMarker indicator <<<
