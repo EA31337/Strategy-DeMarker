@@ -62,7 +62,8 @@ struct Stg_DeMarker_Params : StgParams {
 
 class Stg_DeMarker : public Strategy {
  public:
-  Stg_DeMarker(StgParams &_params, Trade *_trade = NULL, string _name = "") : Strategy(_params, _trade, _name) {}
+  Stg_DeMarker(StgParams &_sparams, TradeParams &_tparams, ChartParams &_cparams, string _name = "")
+      : Strategy(_sparams, _tparams, _cparams, _name) {}
 
   static Stg_DeMarker *Init(ENUM_TIMEFRAMES _tf = NULL, long _magic_no = NULL, ENUM_LOG_LEVEL _log_level = V_INFO) {
     // Initialize strategy initial values.
@@ -78,8 +79,9 @@ class Stg_DeMarker : public Strategy {
     DeMarkerParams dm_params(_indi_params);
     _stg_params.SetIndicator(new Indi_DeMarker(_indi_params));
     // Initialize Strategy instance.
+    ChartParams _cparams(_tf, _Symbol);
     TradeParams _tparams(_magic_no, _log_level);
-    Strategy *_strat = new Stg_DeMarker(_stg_params, new Trade(new Chart(_tf, _Symbol)), "DeMarker");
+    Strategy *_strat = new Stg_DeMarker(_stg_params, _tparams, _cparams, "DeMarker");
     return _strat;
   }
 
