@@ -45,7 +45,7 @@ struct Stg_DeMarker_Params : StgParams {
 
   // Struct constructors.
   Stg_DeMarker_Params(DeMarkerParams &_iparams, StgParams &_sparams)
-      : iparams(indi_demarker_defaults, _iparams.tf), sparams(stg_demarker_defaults) {
+      : iparams(indi_demarker_defaults, _iparams.tf.GetTf()), sparams(stg_demarker_defaults) {
     iparams = _iparams;
     sparams = _sparams;
   }
