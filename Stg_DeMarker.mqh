@@ -6,13 +6,13 @@
 // User input params.
 INPUT string __DeMarker_Parameters__ = "-- DeMarker strategy params --";  // >>> DEMARKER <<<
 INPUT float DeMarker_LotSize = 0;                                         // Lot size
-INPUT int DeMarker_SignalOpenMethod = 0;                                  // Signal open method (-4-4)
+INPUT int DeMarker_SignalOpenMethod = 2;                                  // Signal open method (-127-127)
 INPUT float DeMarker_SignalOpenLevel = 0.2f;                              // Signal open level (0.0-0.5)
-INPUT int DeMarker_SignalOpenFilterMethod = 1;                            // Signal open filter method
+INPUT int DeMarker_SignalOpenFilterMethod = 32;                            // Signal open filter method
 INPUT int DeMarker_SignalOpenBoostMethod = 0;                             // Signal open boost method
-INPUT int DeMarker_SignalCloseMethod = 0;                                 // Signal close method (-4-4)
+INPUT int DeMarker_SignalCloseMethod = 2;                                 // Signal close method (-127-127)
 INPUT float DeMarker_SignalCloseLevel = 0.2f;                             // Signal close level (0.0-0.5)
-INPUT int DeMarker_PriceStopMethod = 0;                                   // Price stop method
+INPUT int DeMarker_PriceStopMethod = 1;                                   // Price stop method
 INPUT float DeMarker_PriceStopLevel = 0;                                  // Price stop level
 INPUT int DeMarker_TickFilterMethod = 1;                                  // Tick filter method
 INPUT float DeMarker_MaxSpread = 4.0;                                     // Max spread to trade (pips)
@@ -121,31 +121,5 @@ class Stg_DeMarker : public Strategy {
       }
     }
     return _result;
-  }
-
-  /**
-   * Gets price stop value for profit take or stop loss.
-   */
-  float PriceStop(ENUM_ORDER_TYPE _cmd, ENUM_ORDER_TYPE_VALUE _mode, int _method = 0, float _level = 0.0) {
-    Indi_DeMarker *_indi = GetIndicator();
-    double _trail = _level * Market().GetPipSize();
-    int _direction = Order::OrderDirection(_cmd, _mode);
-    double _default_value = Market().GetCloseOffer(_cmd) + _trail * _method * _direction;
-    double _result = _default_value;
-    switch (_method) {
-      case 1: {
-        int _bar_count1 = (int)_level * (int)_indi.GetPeriod();
-        _result = _direction > 0 ? _indi.GetPrice(PRICE_HIGH, _indi.GetHighest<double>(_bar_count1))
-                                 : _indi.GetPrice(PRICE_LOW, _indi.GetLowest<double>(_bar_count1));
-        break;
-      }
-      case 2: {
-        int _bar_count2 = (int)_level * (int)_indi.GetPeriod();
-        _result = _direction < 0 ? _indi.GetPrice(PRICE_HIGH, _indi.GetHighest<double>(_bar_count2))
-                                 : _indi.GetPrice(PRICE_LOW, _indi.GetLowest<double>(_bar_count2));
-        break;
-      }
-    }
-    return (float)_result;
   }
 };
