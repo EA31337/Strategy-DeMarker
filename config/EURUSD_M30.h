@@ -16,7 +16,7 @@ struct Stg_DeMarker_Params_M30 : StgParams {
   // Struct constructor.
   Stg_DeMarker_Params_M30() : StgParams(stg_demarker_defaults) {
     lot_size = 0;
-    signal_open_method = -4;
+    signal_open_method = 2;
     signal_open_filter = 32;
     signal_open_level = (float)1.0;
     signal_open_boost = 1;

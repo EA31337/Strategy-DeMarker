@@ -20,7 +20,7 @@ struct Stg_DeMarker_Params_M1 : StgParams {
     signal_open_filter = 32;
     signal_open_level = (float)0.0;
     signal_open_boost = 1;
-    signal_close_method = -1;
+    signal_close_method = 2;
     signal_close_level = (float)0.0;
     price_profit_method = 60;
     price_profit_level = (float)0.6;
