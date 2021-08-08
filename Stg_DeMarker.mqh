@@ -11,6 +11,7 @@ INPUT float DeMarker_SignalOpenLevel = 0.2f;     // Signal open level (0.0-0.5)
 INPUT int DeMarker_SignalOpenFilterMethod = 32;  // Signal open filter method
 INPUT int DeMarker_SignalOpenBoostMethod = 0;    // Signal open boost method
 INPUT int DeMarker_SignalCloseMethod = 2;        // Signal close method (-127-127)
+INPUT int DeMarker_SignalCloseFilter = 0;        // Signal close filter (-127-127)
 INPUT float DeMarker_SignalCloseLevel = 0.2f;    // Signal close level (0.0-0.5)
 INPUT int DeMarker_PriceStopMethod = 1;          // Price stop method
 INPUT float DeMarker_PriceStopLevel = 0;         // Price stop level
@@ -32,9 +33,9 @@ struct Indi_DeMarker_Params_Defaults : DeMarkerParams {
 struct Stg_DeMarker_Params_Defaults : StgParams {
   Stg_DeMarker_Params_Defaults()
       : StgParams(::DeMarker_SignalOpenMethod, ::DeMarker_SignalOpenFilterMethod, ::DeMarker_SignalOpenLevel,
-                  ::DeMarker_SignalOpenBoostMethod, ::DeMarker_SignalCloseMethod, ::DeMarker_SignalCloseLevel,
-                  ::DeMarker_PriceStopMethod, ::DeMarker_PriceStopLevel, ::DeMarker_TickFilterMethod,
-                  ::DeMarker_MaxSpread, ::DeMarker_Shift, ::DeMarker_OrderCloseTime) {}
+                  ::DeMarker_SignalOpenBoostMethod, ::DeMarker_SignalCloseMethod, ::DeMarker_SignalCloseFilter,
+                  ::DeMarker_SignalCloseLevel, ::DeMarker_PriceStopMethod, ::DeMarker_PriceStopLevel,
+                  ::DeMarker_TickFilterMethod, ::DeMarker_MaxSpread, ::DeMarker_Shift, ::DeMarker_OrderCloseTime) {}
 } stg_demarker_defaults;
 
 // Struct to define strategy parameters to override.
