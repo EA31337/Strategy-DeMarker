@@ -8,7 +8,7 @@ INPUT string __DeMarker_Parameters__ = "-- DeMarker strategy params --";  // >>>
 INPUT float DeMarker_LotSize = 0;                                         // Lot size
 INPUT int DeMarker_SignalOpenMethod = 2;                                  // Signal open method (-127-127)
 INPUT float DeMarker_SignalOpenLevel = 0.2f;                              // Signal open level (0.0-0.5)
-INPUT int DeMarker_SignalOpenFilterMethod = 32;                            // Signal open filter method
+INPUT int DeMarker_SignalOpenFilterMethod = 32;                           // Signal open filter method
 INPUT int DeMarker_SignalOpenBoostMethod = 0;                             // Signal open boost method
 INPUT int DeMarker_SignalCloseMethod = 2;                                 // Signal close method (-127-127)
 INPUT float DeMarker_SignalCloseLevel = 0.2f;                             // Signal close level (0.0-0.5)
@@ -98,22 +98,23 @@ class Stg_DeMarker : public Strategy {
   bool SignalOpen(ENUM_ORDER_TYPE _cmd, int _method = 0, float _level = 0.0f, int _shift = 0) {
     Chart *_chart = trade.GetChart();
     Indi_DeMarker *_indi = GetIndicator();
-    bool _is_valid = _indi[_shift].IsValid() && _indi[_shift + 1].IsValid() && _indi[_shift + 2].IsValid();
-    bool _result = _is_valid;
-    if (_is_valid) {
-      IndicatorSignal _signals = _indi.GetSignals(4, _shift);
-      switch (_cmd) {
-        case ORDER_TYPE_BUY:
-          _result &= _indi[_shift][0] < 0.5 - _level;
-          _result &= _indi.IsIncreasing(2);
-          _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
-          break;
-        case ORDER_TYPE_SELL:
-          _result &= _indi[_shift][0] > 0.5 + _level;
-          _result &= _indi.IsDecreasing(2);
-          _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
-          break;
-      }
+    bool _result = _indi.GetFlag(INDI_ENTRY_FLAG_IS_VALID);
+    if (!_result) {
+      // Returns false when indicator data is not valid.
+      return false;
+    }
+    IndicatorSignal _signals = _indi.GetSignals(4, _shift);
+    switch (_cmd) {
+      case ORDER_TYPE_BUY:
+        _result &= _indi[_shift][0] < 0.5 - _level;
+        _result &= _indi.IsIncreasing(2);
+        _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
+        break;
+      case ORDER_TYPE_SELL:
+        _result &= _indi[_shift][0] > 0.5 + _level;
+        _result &= _indi.IsDecreasing(2);
+        _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
+        break;
     }
     return _result;
   }
