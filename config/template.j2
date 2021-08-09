@@ -17,7 +17,7 @@ struct Stg_DeMarker_Params_{{ Timeframe }} : StgParams {
   Stg_DeMarker_Params_{{ Timeframe }}() : StgParams(stg_demarker_defaults) {
     lot_size = {{ DeMarker_LotSize | default(0) }};
     signal_open_method = {{ DeMarker_SignalOpenMethod | default(0) }};
-    signal_open_filter = {{ DeMarker_SignalOpenFilterMethod | default(1) }};
+    signal_open_filter_method = {{ DeMarker_SignalOpenFilterMethod | default(1) }};
     signal_open_level = (float){{ DeMarker_SignalOpenLevel | default(0) }};
     signal_open_boost = {{ DeMarker_SignalOpenBoostMethod | default(0) }};
     signal_close_method = {{ DeMarker_SignalCloseMethod | default(0) }};
