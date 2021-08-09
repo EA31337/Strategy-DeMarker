@@ -9,6 +9,7 @@ INPUT float DeMarker_LotSize = 0;                // Lot size
 INPUT int DeMarker_SignalOpenMethod = 2;         // Signal open method (-127-127)
 INPUT float DeMarker_SignalOpenLevel = 0.2f;     // Signal open level (0.0-0.5)
 INPUT int DeMarker_SignalOpenFilterMethod = 32;  // Signal open filter method
+INPUT int DeMarker_SignalOpenFilterTime = 6;     // Signal open filter time
 INPUT int DeMarker_SignalOpenBoostMethod = 0;    // Signal open boost method
 INPUT int DeMarker_SignalCloseMethod = 2;        // Signal close method (-127-127)
 INPUT int DeMarker_SignalCloseFilter = 0;        // Signal close filter (-127-127)
@@ -41,6 +42,7 @@ struct Stg_DeMarker_Params_Defaults : StgParams {
     Set(STRAT_PARAM_OCL, DeMarker_OrderCloseLoss);
     Set(STRAT_PARAM_OCP, DeMarker_OrderCloseProfit);
     Set(STRAT_PARAM_OCT, DeMarker_OrderCloseTime);
+    Set(STRAT_PARAM_SOFT, DeMarker_SignalOpenFilterTime);
   }
 } stg_demarker_defaults;
 
