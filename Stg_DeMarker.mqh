@@ -6,15 +6,15 @@
 // User input params.
 INPUT_GROUP("DeMarker strategy: strategy params");
 INPUT float DeMarker_LotSize = 0;                // Lot size
-INPUT int DeMarker_SignalOpenMethod = 2;         // Signal open method (-127-127)
+INPUT int DeMarker_SignalOpenMethod = 0;         // Signal open method (-127-127)
 INPUT float DeMarker_SignalOpenLevel = 0.2f;     // Signal open level (0.0-0.5)
 INPUT int DeMarker_SignalOpenFilterMethod = 32;  // Signal open filter method
 INPUT int DeMarker_SignalOpenFilterTime = 6;     // Signal open filter time
 INPUT int DeMarker_SignalOpenBoostMethod = 0;    // Signal open boost method
-INPUT int DeMarker_SignalCloseMethod = 2;        // Signal close method (-127-127)
+INPUT int DeMarker_SignalCloseMethod = 0;        // Signal close method (-127-127)
 INPUT int DeMarker_SignalCloseFilter = 0;        // Signal close filter (-127-127)
 INPUT float DeMarker_SignalCloseLevel = 0.2f;    // Signal close level (0.0-0.5)
-INPUT int DeMarker_PriceStopMethod = 1;          // Price stop method
+INPUT int DeMarker_PriceStopMethod = 1;          // Price stop method (0-127)
 INPUT float DeMarker_PriceStopLevel = 0;         // Price stop level
 INPUT int DeMarker_TickFilterMethod = 1;         // Tick filter method
 INPUT float DeMarker_MaxSpread = 4.0;            // Max spread to trade (pips)
@@ -23,13 +23,14 @@ INPUT float DeMarker_OrderCloseLoss = 0;         // Order close loss
 INPUT float DeMarker_OrderCloseProfit = 0;       // Order close profit
 INPUT int DeMarker_OrderCloseTime = -20;         // Order close time in mins (>0) or bars (<0)
 INPUT_GROUP("DeMarker strategy: DeMarker indicator params");
-INPUT int DeMarker_Indi_DeMarker_Period = 4;  // Period
+INPUT int DeMarker_Indi_DeMarker_Period = 23;  // Period
+INPUT int DeMarker_Indi_DeMarker_Shift = 0;    // Shift
 
 // Structs.
 
 // Defines struct with default user indicator values.
 struct Indi_DeMarker_Params_Defaults : DeMarkerParams {
-  Indi_DeMarker_Params_Defaults() : DeMarkerParams(::DeMarker_Indi_DeMarker_Period) {}
+  Indi_DeMarker_Params_Defaults() : DeMarkerParams(::DeMarker_Indi_DeMarker_Period, ::DeMarker_Indi_DeMarker_Shift) {}
 } indi_demarker_defaults;
 
 // Defines struct with default user strategy values.
