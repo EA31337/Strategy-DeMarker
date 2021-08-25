@@ -21,7 +21,7 @@ INPUT float DeMarker_MaxSpread = 4.0;            // Max spread to trade (pips)
 INPUT short DeMarker_Shift = 0;                  // Shift
 INPUT float DeMarker_OrderCloseLoss = 0;         // Order close loss
 INPUT float DeMarker_OrderCloseProfit = 0;       // Order close profit
-INPUT int DeMarker_OrderCloseTime = -20;         // Order close time in mins (>0) or bars (<0)
+INPUT int DeMarker_OrderCloseTime = -30;         // Order close time in mins (>0) or bars (<0)
 INPUT_GROUP("DeMarker strategy: DeMarker indicator params");
 INPUT int DeMarker_Indi_DeMarker_Period = 23;  // Period
 INPUT int DeMarker_Indi_DeMarker_Shift = 0;    // Shift
