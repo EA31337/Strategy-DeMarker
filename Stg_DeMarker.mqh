@@ -40,6 +40,7 @@ struct Stg_DeMarker_Params_Defaults : StgParams {
                   ::DeMarker_SignalOpenBoostMethod, ::DeMarker_SignalCloseMethod, ::DeMarker_SignalCloseFilter,
                   ::DeMarker_SignalCloseLevel, ::DeMarker_PriceStopMethod, ::DeMarker_PriceStopLevel,
                   ::DeMarker_TickFilterMethod, ::DeMarker_MaxSpread, ::DeMarker_Shift) {
+    Set(STRAT_PARAM_LS, DeMarker_LotSize);
     Set(STRAT_PARAM_OCL, DeMarker_OrderCloseLoss);
     Set(STRAT_PARAM_OCP, DeMarker_OrderCloseProfit);
     Set(STRAT_PARAM_OCT, DeMarker_OrderCloseTime);
