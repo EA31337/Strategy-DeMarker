@@ -77,7 +77,6 @@ class Stg_DeMarker : public Strategy {
                              stg_demarker_h1, stg_demarker_h4, stg_demarker_h8);
 #endif
     // Initialize indicator.
-    DeMarkerParams dm_params(_indi_params);
     _stg_params.SetIndicator(new Indi_DeMarker(_indi_params));
     // Initialize Strategy instance.
     ChartParams _cparams(_tf, _Symbol);
