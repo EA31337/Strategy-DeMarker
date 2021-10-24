@@ -29,8 +29,9 @@ INPUT int DeMarker_Indi_DeMarker_Shift = 0;    // Shift
 // Structs.
 
 // Defines struct with default user indicator values.
-struct Indi_DeMarker_Params_Defaults : DeMarkerParams {
-  Indi_DeMarker_Params_Defaults() : DeMarkerParams(::DeMarker_Indi_DeMarker_Period, ::DeMarker_Indi_DeMarker_Shift) {}
+struct Indi_DeMarker_Params_Defaults : IndiDeMarkerParams {
+  Indi_DeMarker_Params_Defaults()
+      : IndiDeMarkerParams(::DeMarker_Indi_DeMarker_Period, ::DeMarker_Indi_DeMarker_Shift) {}
 };
 
 // Defines struct with default user strategy values.
@@ -67,12 +68,12 @@ class Stg_DeMarker : public Strategy {
   static Stg_DeMarker *Init(ENUM_TIMEFRAMES _tf = NULL) {
     // Initialize strategy initial values.
     Indi_DeMarker_Params_Defaults indi_demarker_defaults;
-    DeMarkerParams _indi_params(indi_demarker_defaults, _tf);
+    IndiDeMarkerParams _indi_params(indi_demarker_defaults, _tf);
     Stg_DeMarker_Params_Defaults stg_demarker_defaults;
     StgParams _stg_params(stg_demarker_defaults);
 #ifdef __config__
-    SetParamsByTf<DeMarkerParams>(_indi_params, _tf, indi_demarker_m1, indi_demarker_m5, indi_demarker_m15,
-                                  indi_demarker_m30, indi_demarker_h1, indi_demarker_h4, indi_demarker_h8);
+    SetParamsByTf<IndiDeMarkerParams>(_indi_params, _tf, indi_demarker_m1, indi_demarker_m5, indi_demarker_m15,
+                                      indi_demarker_m30, indi_demarker_h1, indi_demarker_h4, indi_demarker_h8);
     SetParamsByTf<StgParams>(_stg_params, _tf, stg_demarker_m1, stg_demarker_m5, stg_demarker_m15, stg_demarker_m30,
                              stg_demarker_h1, stg_demarker_h4, stg_demarker_h8);
 #endif

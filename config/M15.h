@@ -4,8 +4,8 @@
  */
 
 // Defines indicator's parameter values for the given pair symbol and timeframe.
-struct Indi_DeMarker_Params_M15 : DeMarkerParams {
-  Indi_DeMarker_Params_M15() : DeMarkerParams(indi_demarker_defaults, PERIOD_M15) {
+struct Indi_DeMarker_Params_M15 : IndiDeMarkerParams {
+  Indi_DeMarker_Params_M15() : IndiDeMarkerParams(indi_demarker_defaults, PERIOD_M15) {
     period = 8;
     shift = 0;
   }

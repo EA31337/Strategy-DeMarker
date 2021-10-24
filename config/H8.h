@@ -4,8 +4,8 @@
  */
 
 // Defines indicator's parameter values for the given pair symbol and timeframe.
-struct Indi_DeMarker_Params_H8 : DeMarkerParams {
-  Indi_DeMarker_Params_H8() : DeMarkerParams(indi_demarker_defaults, PERIOD_H8) {
+struct Indi_DeMarker_Params_H8 : IndiDeMarkerParams {
+  Indi_DeMarker_Params_H8() : IndiDeMarkerParams(indi_demarker_defaults, PERIOD_H8) {
     period = 4;
     shift = 0;
   }
