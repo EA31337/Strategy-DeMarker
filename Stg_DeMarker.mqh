@@ -28,12 +28,6 @@ INPUT int DeMarker_Indi_DeMarker_Shift = 0;    // Shift
 
 // Structs.
 
-// Defines struct with default user indicator values.
-struct Indi_DeMarker_Params_Defaults : IndiDeMarkerParams {
-  Indi_DeMarker_Params_Defaults()
-      : IndiDeMarkerParams(::DeMarker_Indi_DeMarker_Period, ::DeMarker_Indi_DeMarker_Shift) {}
-};
-
 // Defines struct with default user strategy values.
 struct Stg_DeMarker_Params_Defaults : StgParams {
   Stg_DeMarker_Params_Defaults()
@@ -85,8 +79,8 @@ class Stg_DeMarker : public Strategy {
    * Event on strategy's init.
    */
   void OnInit() {
-    Indi_DeMarker_Params_Defaults indi_demarker_defaults;
-    IndiDeMarkerParams _indi_params(indi_demarker_defaults, Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
+    IndiDeMarkerParams _indi_params(::DeMarker_Indi_DeMarker_Period, ::DeMarker_Indi_DeMarker_Shift);
+    _indi_params.SetTf(Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
     SetIndicator(new Indi_DeMarker(_indi_params));
   }
 
