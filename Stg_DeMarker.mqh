@@ -67,13 +67,9 @@ class Stg_DeMarker : public Strategy {
 
   static Stg_DeMarker *Init(ENUM_TIMEFRAMES _tf = NULL) {
     // Initialize strategy initial values.
-    Indi_DeMarker_Params_Defaults indi_demarker_defaults;
-    IndiDeMarkerParams _indi_params(indi_demarker_defaults, _tf);
     Stg_DeMarker_Params_Defaults stg_demarker_defaults;
     StgParams _stg_params(stg_demarker_defaults);
 #ifdef __config__
-    SetParamsByTf<IndiDeMarkerParams>(_indi_params, _tf, indi_demarker_m1, indi_demarker_m5, indi_demarker_m15,
-                                      indi_demarker_m30, indi_demarker_h1, indi_demarker_h4, indi_demarker_h8);
     SetParamsByTf<StgParams>(_stg_params, _tf, stg_demarker_m1, stg_demarker_m5, stg_demarker_m15, stg_demarker_m30,
                              stg_demarker_h1, stg_demarker_h4, stg_demarker_h8);
 #endif
@@ -82,8 +78,16 @@ class Stg_DeMarker : public Strategy {
     ChartParams _cparams(_tf, _Symbol);
     TradeParams _tparams;
     Strategy *_strat = new Stg_DeMarker(_stg_params, _tparams, _cparams, "DeMarker");
-    _strat.SetIndicator(new Indi_DeMarker(_indi_params));
     return _strat;
+  }
+
+  /**
+   * Event on strategy's init.
+   */
+  void OnInit() {
+    Indi_DeMarker_Params_Defaults indi_demarker_defaults;
+    IndiDeMarkerParams _indi_params(indi_demarker_defaults, Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
+    SetIndicator(new Indi_DeMarker(_indi_params));
   }
 
   /**
